@@ -12,7 +12,7 @@ const StepIndicator = () => {
         <StepWrapper
           key={index}
           $disabled={index === stepIndex || disabled || disabledSteps[index]}
-          $completed={stepIndex >= index}
+          $completed={!disabledSteps[index]}
           onClick={() => setStepIndex(index)}
         >
           {stepIndex > index ? (
