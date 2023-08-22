@@ -10,6 +10,7 @@ type StepContainerProps = {
 type StepWrapperProps = {
   $disabled: boolean
   $completed: boolean
+  $active: boolean
 }
 
 export const StepContainer = styled(ButtonContainer)<StepContainerProps>`
@@ -48,9 +49,14 @@ export const StepWrapper = styled.div<StepWrapperProps>`
   border-radius: 50%;
   z-index: 1;
   cursor: pointer;
-  color: ${({ $completed }) => ($completed ? 'var(--blue)' : '#ddd')};
-  border: 3px solid ${({ $completed }) => ($completed ? 'var(--blue)' : '#ddd')};
   pointer-events: ${({ $disabled }) => $disabled && 'none'};
+  color: ${({ $completed, $active }) => {
+    return $active ? 'var(--darkblue)' : $completed ? 'var(--blue)' : '#ddd'
+  }};
+  border: 3px solid
+    ${({ $completed, $active }) => {
+      return $active ? 'var(--darkblue)' : $completed ? 'var(--blue)' : '#ddd'
+    }};
 
   :first-child {
     font-size: 1.3rem;

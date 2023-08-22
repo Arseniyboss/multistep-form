@@ -53,6 +53,7 @@ type FormContextType = {
   isLastStep: boolean
   disabled: boolean
   disabledSteps: boolean[]
+  stepErrors: boolean[]
   values: FormValues
   errors: Errors<FormValues>
   back: () => void
@@ -85,6 +86,7 @@ const initialContextValues: FormContextType = {
   isLastStep: false,
   disabled: false,
   disabledSteps: [],
+  stepErrors: [],
   values: initialFormValues,
   errors: {},
   back: () => {},
@@ -136,11 +138,13 @@ export const FormContextProvider = ({ children }: Props) => {
 
   const stepOneErrors = checkErrors(values, userSchema)
   const stepTwoErrors = checkErrors(values, addressSchema)
+  const stepThreeErrors = checkErrors(values, accountSchema)
 
   const disabledStepTwo = stepOneErrors
   const disabledStepTree = disabledStepTwo || stepTwoErrors
 
   const disabledSteps = [false, disabledStepTwo, disabledStepTree]
+  const stepErrors = [stepOneErrors, stepTwoErrors, stepThreeErrors]
 
   const value = {
     stepIndex,
@@ -149,6 +153,7 @@ export const FormContextProvider = ({ children }: Props) => {
     isLastStep,
     disabled,
     disabledSteps,
+    stepErrors,
     values,
     errors,
     back,
