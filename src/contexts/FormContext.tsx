@@ -79,23 +79,7 @@ const initialFormValues: FormValues = {
   password: '',
 }
 
-const initialContextValues: FormContextType = {
-  stepIndex: 0,
-  step: <></>,
-  isFirstStep: false,
-  isLastStep: false,
-  disabled: false,
-  disabledSteps: [],
-  stepErrors: [],
-  values: initialFormValues,
-  errors: {},
-  back: () => {},
-  setStepIndex: () => {},
-  handleChange: () => {},
-  handleSubmit: () => {},
-}
-
-export const FormContext = createContext(initialContextValues)
+export const FormContext = createContext<FormContextType | null>(null)
 
 export const FormContextProvider = ({ children }: Props) => {
   const [stepIndex, setStepIndex] = useState(0)
@@ -166,5 +150,11 @@ export const FormContextProvider = ({ children }: Props) => {
 }
 
 export const useFormContext = () => {
-  return useContext(FormContext)
+  const context = useContext(FormContext)
+
+  if (context === null) {
+    throw new Error('useFormContext must be used within a FormContextProvider')
+  }
+
+  return context
 }

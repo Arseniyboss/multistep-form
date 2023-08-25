@@ -80,7 +80,6 @@ export const useForm = <T>(options: {
   const [isSubmitted, setIsSubmitted] = useState(false)
 
   const validateOnSubmit = () => {
-    // if (validationSchema && !isSubmitted) {
     if (validationSchema && (!isSubmitted || !isSubmitting)) {
       setErrors(validate(values, validationSchema))
       setIsChanging(false)
