@@ -11,6 +11,7 @@ const StepIndicator = () => {
     <StepContainer width={width}>
       {steps.map((step, index) => (
         <StepWrapper
+          type='button'
           key={index}
           disabled={index === stepIndex || disabled || disabledSteps[index]}
           $completed={!stepErrors[index]}
