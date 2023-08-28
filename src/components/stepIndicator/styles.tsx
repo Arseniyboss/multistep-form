@@ -8,7 +8,6 @@ type StepContainerProps = {
 }
 
 type StepWrapperProps = {
-  disabled: boolean
   $completed: boolean
   $active: boolean
 }
