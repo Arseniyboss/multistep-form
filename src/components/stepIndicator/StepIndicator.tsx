@@ -12,7 +12,7 @@ const StepIndicator = () => {
       {steps.map((step, index) => (
         <StepWrapper
           key={index}
-          $disabled={index === stepIndex || disabled || disabledSteps[index]}
+          disabled={index === stepIndex || disabled || disabledSteps[index]}
           $completed={!stepErrors[index]}
           $active={index === stepIndex}
           onClick={() => setStepIndex(index)}

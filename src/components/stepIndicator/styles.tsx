@@ -1,14 +1,14 @@
 'use client'
 
 import styled from 'styled-components'
-import { ButtonContainer } from '@styles/form'
+import { Button, ButtonContainer } from '@styles/form'
 
 type StepContainerProps = {
   width: string
 }
 
 type StepWrapperProps = {
-  $disabled: boolean
+  disabled: boolean
   $completed: boolean
   $active: boolean
 }
@@ -38,7 +38,7 @@ export const StepContainer = styled(ButtonContainer)<StepContainerProps>`
   }
 `
 
-export const StepWrapper = styled.div<StepWrapperProps>`
+export const StepWrapper = styled(Button)<StepWrapperProps>`
   --size: 40px;
   width: var(--size);
   height: var(--size);
@@ -48,8 +48,6 @@ export const StepWrapper = styled.div<StepWrapperProps>`
   background: white;
   border-radius: 50%;
   z-index: 1;
-  cursor: pointer;
-  pointer-events: ${({ $disabled }) => $disabled && 'none'};
   color: ${({ $completed, $active }) => {
     return $active ? 'var(--lightblue)' : $completed ? 'var(--blue)' : '#ddd'
   }};
@@ -60,6 +58,10 @@ export const StepWrapper = styled.div<StepWrapperProps>`
 
   :first-child {
     font-size: 1.3rem;
+  }
+
+  &:disabled {
+    opacity: 1;
   }
 `
 
