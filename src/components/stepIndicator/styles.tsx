@@ -51,11 +51,11 @@ export const StepWrapper = styled.div<StepWrapperProps>`
   cursor: pointer;
   pointer-events: ${({ $disabled }) => $disabled && 'none'};
   color: ${({ $completed, $active }) => {
-    return $active ? 'var(--darkblue)' : $completed ? 'var(--blue)' : '#ddd'
+    return $active ? 'var(--lightblue)' : $completed ? 'var(--blue)' : '#ddd'
   }};
   border: 3px solid
     ${({ $completed, $active }) => {
-      return $active ? 'var(--darkblue)' : $completed ? 'var(--blue)' : '#ddd'
+      return $active ? 'var(--lightblue)' : $completed ? 'var(--blue)' : '#ddd'
     }};
 
   :first-child {
