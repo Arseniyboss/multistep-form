@@ -32,10 +32,10 @@ type Props = {
 type Step = {
   step: ReactElement
   label: string
-  validationSchema: FieldValidation<FormValues>
+  validationSchema: FieldValidation<Values>
 }
 
-type FormValues = {
+type Values = {
   name: string
   age: string
   street: string
@@ -54,8 +54,8 @@ type FormContextType = {
   disabled: boolean
   disabledSteps: boolean[]
   stepErrors: boolean[]
-  values: FormValues
-  errors: Errors<FormValues>
+  values: Values
+  errors: Errors<Values>
   back: () => void
   setStepIndex: Dispatch<SetStateAction<number>>
   handleChange: (e: ChangeEventType) => void
@@ -68,7 +68,7 @@ export const steps: Step[] = [
   { step: <AccountForm />, label: 'Account', validationSchema: accountSchema },
 ]
 
-const initialFormValues: FormValues = {
+const initialValues: Values = {
   name: '',
   age: '',
   street: '',
@@ -101,7 +101,7 @@ export const FormContextProvider = ({ children }: Props) => {
   const onSubmit = () => {
     if (!isLastStep) return next()
     setSuccess(true)
-    setValues(initialFormValues)
+    setValues(initialValues)
     alert('Success!')
   }
 
@@ -113,7 +113,7 @@ export const FormContextProvider = ({ children }: Props) => {
   }, [success, setStepIndex])
 
   const { values, setValues, errors, handleChange, handleSubmit } = useForm({
-    initialValues: initialFormValues,
+    initialValues,
     onSubmit,
     validationSchema,
   })
