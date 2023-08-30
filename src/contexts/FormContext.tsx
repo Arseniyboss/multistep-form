@@ -120,9 +120,9 @@ export const FormContextProvider = ({ children }: Props) => {
 
   const disabled = Object.keys(errors).length > 0
 
-  const stepOneErrors = checkErrors(values, userSchema)
-  const stepTwoErrors = checkErrors(values, addressSchema)
-  const stepThreeErrors = checkErrors(values, accountSchema)
+  const stepOneErrors = checkErrors(values, steps[0].validationSchema)
+  const stepTwoErrors = checkErrors(values, steps[1].validationSchema)
+  const stepThreeErrors = checkErrors(values, steps[2].validationSchema)
 
   const disabledStepTwo = stepOneErrors
   const disabledStepTree = disabledStepTwo || stepTwoErrors
