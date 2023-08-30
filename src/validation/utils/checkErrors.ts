@@ -1,4 +1,4 @@
-import { validate } from '@validation/validate'
+import { validate } from './validate'
 import { FieldValidation } from '@hooks/useForm'
 
 export const checkErrors = <T>(
