@@ -21,6 +21,8 @@ import { validationSchema as userSchema } from '@validation/schemas/userSchema'
 import { validationSchema as addressSchema } from '@validation/schemas/addressSchema'
 import { validationSchema as accountSchema } from '@validation/schemas/accountSchema'
 import { checkErrors } from '@validation/checkErrors'
+import { getStepErrors } from '@validation/getStepErrors'
+import { getDisabledSteps } from '@validation/getDisabledSteps'
 import UserForm from '@components/forms/UserForm'
 import AddressForm from '@components/forms/AddressForm'
 import AccountForm from '@components/forms/AccountForm'
@@ -29,13 +31,13 @@ type Props = {
   children: ReactNode
 }
 
-type Step = {
+export type Step = {
   step: ReactElement
   label: string
   validationSchema: FieldValidation<Values>
 }
 
-type Values = {
+export type Values = {
   name: string
   age: string
   street: string
@@ -120,15 +122,8 @@ export const FormContextProvider = ({ children }: Props) => {
 
   const disabled = Object.keys(errors).length > 0
 
-  const stepOneErrors = checkErrors(values, steps[0].validationSchema)
-  const stepTwoErrors = checkErrors(values, steps[1].validationSchema)
-  const stepThreeErrors = checkErrors(values, steps[2].validationSchema)
-
-  const disabledStepTwo = stepOneErrors
-  const disabledStepTree = disabledStepTwo || stepTwoErrors
-
-  const disabledSteps = [false, disabledStepTwo, disabledStepTree]
-  const stepErrors = [stepOneErrors, stepTwoErrors, stepThreeErrors]
+  const stepErrors = getStepErrors(values)
+  const disabledSteps = getDisabledSteps(stepErrors)
 
   const value = {
     stepIndex,
