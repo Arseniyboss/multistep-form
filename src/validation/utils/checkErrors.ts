@@ -1,9 +1,9 @@
 import { validate } from './validate'
-import { FieldValidation } from '@hooks/useForm'
+import { ValidationSchema } from '@hooks/useForm'
 
-export const checkErrors = <T>(
+export const checkErrors = <T extends Record<keyof T, string>>(
   values: T,
-  validationSchema: FieldValidation<T>
+  validationSchema: ValidationSchema<T>
 ) => {
   const errors = validate(values, validationSchema)
   return Object.keys(errors).length > 0

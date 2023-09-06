@@ -7,7 +7,6 @@ import FormButtons from '@components/FormButtons'
 
 const AddressForm = () => {
   const { values, errors, handleChange, handleSubmit } = useFormContext()
-
   return (
     <Form onSubmit={handleSubmit}>
       <h1>Address</h1>

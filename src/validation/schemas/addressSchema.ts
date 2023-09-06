@@ -1,4 +1,4 @@
-import { FieldValidation } from '../../hooks/useForm'
+import { ValidationSchema } from '../../hooks/useForm'
 import {
   STREET_REQUIRED,
   STREET_INVALID,
@@ -16,14 +16,14 @@ import {
   POSTAL_CODE_PATTERN,
 } from '@validation/constants/patterns'
 
-type InitialValues = {
+type Values = {
   street: string
   country: string
   city: string
   postalCode: string
 }
 
-export const validationSchema: FieldValidation<InitialValues> = {
+export const validationSchema: ValidationSchema<Values> = {
   street: {
     required: { value: true, message: STREET_REQUIRED },
     pattern: { value: STREET_PATTERN, message: STREET_INVALID },

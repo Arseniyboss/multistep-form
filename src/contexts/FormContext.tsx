@@ -5,17 +5,18 @@ import {
   SetStateAction,
   ReactElement,
   ReactNode,
+  FormEvent,
+  ChangeEvent,
   createContext,
   useContext,
   useState,
   useEffect,
 } from 'react'
 import {
+  ValidationSchema,
   Errors,
-  ChangeEventType,
-  FormEventType,
+  HTMLChangeElement,
   useForm,
-  FieldValidation,
 } from '@hooks/useForm'
 import { validationSchema as userSchema } from '@validation/schemas/userSchema'
 import { validationSchema as addressSchema } from '@validation/schemas/addressSchema'
@@ -33,7 +34,7 @@ type Props = {
 export type Step = {
   step: ReactElement
   label: string
-  validationSchema: FieldValidation<Values>
+  validationSchema: ValidationSchema<Values>
 }
 
 export type Values = {
@@ -59,8 +60,8 @@ type FormContextType = {
   errors: Errors<Values>
   back: () => void
   setStepIndex: Dispatch<SetStateAction<number>>
-  handleChange: (e: ChangeEventType) => void
-  handleSubmit: (e: FormEventType) => void
+  handleChange: (e: ChangeEvent<HTMLChangeElement>) => void
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void
 }
 
 export const steps: Step[] = [
